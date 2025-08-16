@@ -1,0 +1,79 @@
+version: "3"
+services:
+  dbu.app:
+    container_name: dbu.app-container
+    restart: "no"
+    networks:
+      - dbuapp_network
+    env_file: ./.env
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    ports:
+      - "8089:80"
+    external_links:
+      - dbu.app
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+      - "localhost:host-gateway"
+      - "localhost.localdomain:host-gateway"
+    volumes:
+      - ./application/dbu.app:/var/www/html
+    environment:
+      APPLICATION_ENV: development
+
+  dbu.app-db:
+    container_name: dbu.app-db-container
+    restart: "no"
+    networks:
+      - dbuapp_network
+    env_file: ./.env
+    image: mariadb:11
+    ports:
+      - "3309:3306"
+    volumes:
+      - ./volumes/mysql:/var/lib/mysql
+      - ./volumes/mysql/logs:/var/log/mysql
+      - ./volumes/mysql/my.conf:/etc/mysql/conf.d/config-file.cnf
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+  dbu.app-phpmyadmin:
+    container_name: dbu.app-phpmyadmin-container
+    networks:
+      - dbuapp_network
+    env_file: ./.env
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "8181:80"
+    environment:
+      PMA_HOST: dbu.app-db
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+  dbu.app-s3:
+    container_name: dbu.app-s3-container
+    networks:
+      - dbuapp_network
+    env_file: ./.env
+    image: minio/minio
+    ports:
+      - '9000:9000'
+      - '9001:9001'
+    volumes:
+      - ./volumes/s3_data:/data
+    environment:
+      MINIO_ACCESS_KEY: ${MINIO_ACCESS_KEY}
+      MINIO_SECRET_KEY: ${MINIO_SECRET_KEY}
+    command: server /data --console-address ":9001"
+networks:
+  dbuapp_network:
+    driver: bridge
+volumes:
+  app_data:
+  mysql_data:
+  mysql_data_logs:
+  mysql_data_config:
+  s3_data:

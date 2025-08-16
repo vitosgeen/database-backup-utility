@@ -1,0 +1,168 @@
+<dataConfig>
+  <dataSource type="JdbcDataSource" 
+              driver="com.mysql.jdbc.Driver"
+              url="jdbc:mysql://sport_predictions.app-db:3306/sport_predictions.app"
+              user="sport_predictions.app-user"
+              password="sport_predictions.app-password" />
+
+  <document>
+    <entity name="document" 
+            query="SELECT 
+                    `origin_user_id` as user_id, #integer
+                    `name` as user_name, #string
+                    `last_online` as user_online, #integer
+                    JSON_EXTRACT(additional_info, '$.user_ip') AS user_ip, #string
+                    JSON_EXTRACT(additional_info, '$.user_visible') AS user_visible, #integer
+                    JSON_EXTRACT(additional_info, '$.user_gifts') AS user_gifts, #integer
+                    JSON_EXTRACT(additional_info, '$.user_video_chat') AS user_video_chat, #integer
+                    JSON_EXTRACT(additional_info, '$.user_zoom_chat') AS user_zoom_chat, #integer
+                    JSON_EXTRACT(additional_info, '$.user_country') AS user_country, #string
+                    JSON_EXTRACT(additional_info, '$.user_region') AS user_region, #string
+                    JSON_EXTRACT(additional_info, '$.user_city') AS user_city, #string
+                    JSON_EXTRACT(additional_info, '$.user_real_country') AS user_real_country, #string
+                    JSON_EXTRACT(additional_info, '$.info_birthday.date') AS info_birthday, #date
+                    JSON_EXTRACT(additional_info, '$.info_weight') AS info_weight, #integer
+                    JSON_EXTRACT(additional_info, '$.info_height') AS info_height, #integer
+                    JSON_EXTRACT(additional_info, '$.info_eyes') AS info_eyes, #string
+                    JSON_EXTRACT(additional_info, '$.info_hair') AS info_hair, #string
+                    JSON_EXTRACT(additional_info, '$.info_smoke') AS info_smoke, #string
+                    JSON_EXTRACT(additional_info, '$.info_alcohol') AS info_alcohol, #string
+                    JSON_EXTRACT(additional_info, '$.info_marital') AS info_marital, #string
+                    JSON_EXTRACT(additional_info, '$.info_children') AS info_children, #string
+                    JSON_EXTRACT(additional_info, '$.info_english') AS info_english, #string
+                    JSON_EXTRACT(additional_info, '$.info_education') AS info_education, #string
+                    JSON_EXTRACT(additional_info, '$.info_religion') AS info_religion, #string
+                    JSON_EXTRACT(additional_info, '$.info_profession') AS info_profession, #string
+                    JSON_EXTRACT(additional_info, '$.info_address') AS info_address, #string
+                    JSON_EXTRACT(additional_info, '$.info_profession') AS info_profession, #string
+                    JSON_EXTRACT(additional_info, '$.info_registration') AS info_registration, #string
+                    JSON_EXTRACT(additional_info, '$.info_about') AS info_about, #string
+                    JSON_EXTRACT(additional_info, '$.info_hobby') AS info_hobby, #string
+                    JSON_EXTRACT(additional_info, '$.info_relationship') AS info_relationship, #string
+                    JSON_EXTRACT(additional_info, '$.info_presentation') AS info_presentation, #string
+                    JSON_EXTRACT(additional_info, '$.info_presentation_photo') AS info_presentation_photo, #string
+                    JSON_EXTRACT(additional_info, '$.info_why') AS info_why, #string
+                    JSON_EXTRACT(additional_info, '$.info_add_inf') AS info_add_inf, #string
+                    JSON_EXTRACT(additional_info, '$.info_date_smoker') AS info_date_smoker, #string
+                    JSON_EXTRACT(additional_info, '$.info_zip') AS info_zip #string
+                  FROM woman_data
+                  WHERE id != 0"
+            deltaQuery="SELECT 
+                    `origin_user_id` as user_id, #integer
+                    `name` as user_name, #string
+                    `last_online` as user_online, #integer
+                    JSON_EXTRACT(additional_info, '$.user_ip') AS user_ip, #string
+                    JSON_EXTRACT(additional_info, '$.user_visible') AS user_visible, #integer
+                    JSON_EXTRACT(additional_info, '$.user_gifts') AS user_gifts, #integer
+                    JSON_EXTRACT(additional_info, '$.user_video_chat') AS user_video_chat, #integer
+                    JSON_EXTRACT(additional_info, '$.user_zoom_chat') AS user_zoom_chat, #integer
+                    JSON_EXTRACT(additional_info, '$.user_country') AS user_country, #string
+                    JSON_EXTRACT(additional_info, '$.user_region') AS user_region, #string
+                    JSON_EXTRACT(additional_info, '$.user_city') AS user_city, #string
+                    JSON_EXTRACT(additional_info, '$.user_real_country') AS user_real_country, #string
+                    JSON_EXTRACT(additional_info, '$.info_birthday.date') AS info_birthday, #date
+                    JSON_EXTRACT(additional_info, '$.info_weight') AS info_weight, #integer
+                    JSON_EXTRACT(additional_info, '$.info_height') AS info_height, #integer
+                    JSON_EXTRACT(additional_info, '$.info_eyes') AS info_eyes, #string
+                    JSON_EXTRACT(additional_info, '$.info_hair') AS info_hair, #string
+                    JSON_EXTRACT(additional_info, '$.info_smoke') AS info_smoke, #string
+                    JSON_EXTRACT(additional_info, '$.info_alcohol') AS info_alcohol, #string
+                    JSON_EXTRACT(additional_info, '$.info_marital') AS info_marital, #string
+                    JSON_EXTRACT(additional_info, '$.info_children') AS info_children, #string
+                    JSON_EXTRACT(additional_info, '$.info_english') AS info_english, #string
+                    JSON_EXTRACT(additional_info, '$.info_education') AS info_education, #string
+                    JSON_EXTRACT(additional_info, '$.info_religion') AS info_religion, #string
+                    JSON_EXTRACT(additional_info, '$.info_profession') AS info_profession, #string
+                    JSON_EXTRACT(additional_info, '$.info_address') AS info_address, #string
+                    JSON_EXTRACT(additional_info, '$.info_profession') AS info_profession, #string
+                    JSON_EXTRACT(additional_info, '$.info_registration') AS info_registration, #string
+                    JSON_EXTRACT(additional_info, '$.info_about') AS info_about, #string
+                    JSON_EXTRACT(additional_info, '$.info_hobby') AS info_hobby, #string
+                    JSON_EXTRACT(additional_info, '$.info_relationship') AS info_relationship, #string
+                    JSON_EXTRACT(additional_info, '$.info_presentation') AS info_presentation, #string
+                    JSON_EXTRACT(additional_info, '$.info_presentation_photo') AS info_presentation_photo, #string
+                    JSON_EXTRACT(additional_info, '$.info_why') AS info_why, #string
+                    JSON_EXTRACT(additional_info, '$.info_add_inf') AS info_add_inf, #string
+                    JSON_EXTRACT(additional_info, '$.info_date_smoker') AS info_date_smoker, #string
+                    JSON_EXTRACT(additional_info, '$.info_zip') AS info_zip #string
+                  FROM woman_data
+                  WHERE id != 0 AND updated_at > '${dataimporter.last_index_time}'"
+            deltaImportQuery="SELECT 
+                    `origin_user_id` as user_id, #integer
+                    `name` as user_name, #string
+                    `last_online` as user_online, #integer
+                    JSON_EXTRACT(additional_info, '$.user_ip') AS user_ip, #string
+                    JSON_EXTRACT(additional_info, '$.user_visible') AS user_visible, #integer
+                    JSON_EXTRACT(additional_info, '$.user_gifts') AS user_gifts, #integer
+                    JSON_EXTRACT(additional_info, '$.user_video_chat') AS user_video_chat, #integer
+                    JSON_EXTRACT(additional_info, '$.user_zoom_chat') AS user_zoom_chat, #integer
+                    JSON_EXTRACT(additional_info, '$.user_country') AS user_country, #string
+                    JSON_EXTRACT(additional_info, '$.user_region') AS user_region, #string
+                    JSON_EXTRACT(additional_info, '$.user_city') AS user_city, #string
+                    JSON_EXTRACT(additional_info, '$.user_real_country') AS user_real_country, #string
+                    JSON_EXTRACT(additional_info, '$.info_birthday.date') AS info_birthday, #date
+                    JSON_EXTRACT(additional_info, '$.info_weight') AS info_weight, #integer
+                    JSON_EXTRACT(additional_info, '$.info_height') AS info_height, #integer
+                    JSON_EXTRACT(additional_info, '$.info_eyes') AS info_eyes, #string
+                    JSON_EXTRACT(additional_info, '$.info_hair') AS info_hair, #string
+                    JSON_EXTRACT(additional_info, '$.info_smoke') AS info_smoke, #string
+                    JSON_EXTRACT(additional_info, '$.info_alcohol') AS info_alcohol, #string
+                    JSON_EXTRACT(additional_info, '$.info_marital') AS info_marital, #string
+                    JSON_EXTRACT(additional_info, '$.info_children') AS info_children, #string
+                    JSON_EXTRACT(additional_info, '$.info_english') AS info_english, #string
+                    JSON_EXTRACT(additional_info, '$.info_education') AS info_education, #string
+                    JSON_EXTRACT(additional_info, '$.info_religion') AS info_religion, #string
+                    JSON_EXTRACT(additional_info, '$.info_profession') AS info_profession, #string
+                    JSON_EXTRACT(additional_info, '$.info_address') AS info_address, #string
+                    JSON_EXTRACT(additional_info, '$.info_profession') AS info_profession, #string
+                    JSON_EXTRACT(additional_info, '$.info_registration') AS info_registration, #string
+                    JSON_EXTRACT(additional_info, '$.info_about') AS info_about, #string
+                    JSON_EXTRACT(additional_info, '$.info_hobby') AS info_hobby, #string
+                    JSON_EXTRACT(additional_info, '$.info_relationship') AS info_relationship, #string
+                    JSON_EXTRACT(additional_info, '$.info_presentation') AS info_presentation, #string
+                    JSON_EXTRACT(additional_info, '$.info_presentation_photo') AS info_presentation_photo, #string
+                    JSON_EXTRACT(additional_info, '$.info_why') AS info_why, #string
+                    JSON_EXTRACT(additional_info, '$.info_add_inf') AS info_add_inf, #string
+                    JSON_EXTRACT(additional_info, '$.info_date_smoker') AS info_date_smoker, #string
+                    JSON_EXTRACT(additional_info, '$.info_zip') AS info_zip #string
+                  FROM woman_data
+                  WHERE id='${dih.delta.id}'">
+      <field column="user_id" name="user_id" />
+      <field column="user_name" name="user_name" />
+      <field column="user_online" name="user_online" />
+      <field column="user_ip" name="user_ip" />
+      <field column="user_visible" name="user_visible" />
+      <field column="user_gifts" name="user_gifts" />
+      <field column="user_video_chat" name="user_video_chat" />
+      <field column="user_zoom_chat" name="user_zoom_chat" />
+      <field column="user_country" name="user_country" />
+      <field column="user_region" name="user_region" />
+      <field column="user_city" name="user_city" />
+      <field column="user_real_country" name="user_real_country" />
+      <field column="info_birthday" name="info_birthday" />
+      <field column="info_weight" name="info_weight" />
+      <field column="info_height" name="info_height" />
+      <field column="info_eyes" name="info_eyes" />
+      <field column="info_hair" name="info_hair" />
+      <field column="info_smoke" name="info_smoke" />
+      <field column="info_alcohol" name="info_alcohol" />
+      <field column="info_marital" name="info_marital" />
+      <field column="info_children" name="info_children" />
+      <field column="info_english" name="info_english" />
+      <field column="info_education" name="info_education" />
+      <field column="info_religion" name="info_religion" />
+      <field column="info_profession" name="info_profession" />
+      <field column="info_address" name="info_address" />
+      <field column="info_registration" name="info_registration" />
+      <field column="info_about" name="info_about" />
+      <field column="info_hobby" name="info_hobby" />
+      <field column="info_relationship" name="info_relationship" /> 
+      <field column="info_presentation" name="info_presentation" />
+      <field column="info_presentation_photo" name="info_presentation_photo" />
+      <field column="info_why" name="info_why" />
+      <field column="info_add_inf" name="info_add_inf" />
+      <field column="info_date_smoker" name="info_date_smoker" />
+      <field column="info_zip" name="info_zip" />      
+    </entity>
+  </document>
+</dataConfig>

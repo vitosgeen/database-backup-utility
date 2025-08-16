@@ -1,0 +1,184 @@
+<schema name="women_schema" version="1.0">
+    <types>
+        <fieldType name="string" class="solr.StrField" sortMissingLast="true" />
+        <fieldType name="text_general" class="solr.TextField" positionIncrementGap="100">
+        <analyzer type="index">
+            <tokenizer class="solr.StandardTokenizerFactory"/>
+            <filter class="solr.LowerCaseFilterFactory"/>
+        </analyzer>
+        <analyzer type="query">
+            <tokenizer class="solr.StandardTokenizerFactory"/>
+            <filter class="solr.LowerCaseFilterFactory"/>
+        </analyzer>
+        </fieldType>
+        <fieldType name="integer" class="solr.TrieIntField" precisionStep="0" positionIncrementGap="0"/>
+        <fieldType name="date" class="solr.TrieDateField" precisionStep="0" positionIncrementGap="0"/>
+    </types>
+    <fields>
+        <field name="user_id" type="integer" indexed="true" stored="true" required="true" />
+        <field name="user_name" type="string" indexed="true" stored="true" required="true" />
+        <field name="user_online" type="integer" indexed="true" stored="true" required="true" />
+        <field name="user_ip" type="string" indexed="true" stored="true" required="true" />
+        <field name="user_visible" type="integer" indexed="true" stored="true" required="true" />
+        <field name="user_gifts" type="integer" indexed="true" stored="true" required="true" />
+        <field name="user_video_chat" type="integer" indexed="true" stored="true" required="true" />
+        <field name="user_zoom_chat" type="integer" indexed="true" stored="true" required="true" />
+        <field name="user_country" type="string" indexed="true" stored="true" required="true" />
+        <field name="user_region" type="string" indexed="true" stored="true" required="true" />
+        <field name="user_city" type="string" indexed="true" stored="true" required="true" />
+        <field name="user_real_country" type="string" indexed="true" stored="true" required="true" />
+        <field name="info_birthday" type="date" indexed="true" stored="true" required="true" />
+        <field name="info_weight" type="integer" indexed="true" stored="true" required="true" />
+        <field name="info_height" type="integer" indexed="true" stored="true" required="true" />
+        <field name="info_eyes" type="string" indexed="true" stored="true" required="true" />
+        <field name="info_hair" type="string" indexed="true" stored="true" required="true" />   
+        <field name="info_smoke" type="string" indexed="true" stored="true" required="true" />
+        <field name="info_alcohol" type="string" indexed="true" stored="true" required="true" />
+        <field name="info_marital" type="string" indexed="true" stored="true" required="true" />
+        <field name="info_children" type="string" indexed="true" stored="true" required="true" />
+        <field name="info_english" type="string" indexed="true" stored="true" required="true" />
+        <field name="info_education" type="string" indexed="true" stored="true" required="true" />
+        <field name="info_religion" type="string" indexed="true" stored="true" required="true" />   
+        <field name="info_profession" type="string" indexed="true" stored="true" required="true" />
+        <field name="info_address" type="string" indexed="true" stored="true" required="true" />
+        <field name="info_registration" type="string" indexed="true" stored="true" required="true" />
+        <field name="info_about" type="string" indexed="true" stored="true" required="true" />
+        <field name="info_hobby" type="string" indexed="true" stored="true" required="true" />
+        <field name="info_relationship" type="string" indexed="true" stored="true" required="true" />
+        <field name="info_presentation" type="string" indexed="true" stored="true" required="true" />
+        <field name="info_presentation_photo" type="string" indexed="true" stored="true" required="true" />
+        <field name="info_why" type="string" indexed="true" stored="true" required="true" />
+        <field name="info_add_inf" type="string" indexed="true" stored="true" required="true" />
+        <field name="info_date_smoker" type="string" indexed="true" stored="true" required="true" />
+        <field name="info_zip" type="string" indexed="true" stored="true" required="true" />
+    </fields>
+
+    <uniqueKey>user_id</uniqueKey>
+
+    <!-- MoreLikeThis Handler -->
+    <requestHandler name="/mlt" class="solr.MoreLikeThisHandler">
+        <str name="mlt.mintf">1</str>
+        <str name="mlt.mindf">2</str>
+
+        <str name="mlt.boost">true</str>
+
+        <str name="mlt.qf">
+            user_name^20.0
+            user_online^10.0
+            user_ip^10.0
+            user_visible^10.0
+            user_gifts^10.0
+            user_video_chat^10.0
+            user_zoom_chat^10.0
+            user_country^10.0
+            user_region^10.0
+            user_city^10.0
+            user_real_country^10.0
+            info_birthday^10.0
+            info_weight^10.0
+            info_height^10.0
+            info_eyes^10.0
+            info_hair^10.0
+            info_smoke^10.0
+            info_alcohol^10.0
+            info_marital^10.0
+            info_children^10.0
+            info_english^10.0
+            info_education^10.0
+            info_religion^10.0
+            info_profession^10.0
+            info_address^10.0
+            info_registration^10.0
+            info_about^10.0
+            info_hobby^10.0
+            info_relationship^10.0
+            info_presentation^10.0
+            info_presentation_photo^10.0
+            info_why^10.0
+            info_add_inf^10.0
+            info_date_smoker^10.0
+            info_zip^10.0
+        </str>
+
+        <str name="mlt.fl">
+            user_name
+            user_online
+            user_ip
+            user_visible
+            user_gifts
+            user_video_chat
+            user_zoom_chat
+            user_country
+            user_region
+            user_city
+            user_real_country
+            info_birthday
+            info_weight
+            info_height
+            info_eyes
+            info_hair
+            info_smoke
+            info_alcohol
+            info_marital
+            info_children
+            info_english
+            info_education
+            info_religion
+            info_profession
+            info_address
+            info_registration
+            info_about
+            info_hobby
+            info_relationship
+            info_presentation
+            info_presentation_photo
+            info_why
+            info_add_inf
+            info_date_smoker
+            info_zip
+        </str>
+
+        <str name="mlt.match.include">true</str>
+        <str name="mlt.match.offset">0</str>
+        <str name="mlt.match.count">3</str>
+
+        <str name="mlt.fl">user_name</str>
+        <str name="mlt.fl">user_online</str>
+        <str name="mlt.fl">user_ip</str>
+        <str name="mlt.fl">user_visible</str>
+        <str name="mlt.fl">user_gifts</str>
+        <str name="mlt.fl">user_video_chat</str>
+        <str name="mlt.fl">user_zoom_chat</str>
+        <str name="mlt.fl">user_country</str>
+        <str name="mlt.fl">user_region</str>
+        <str name="mlt.fl">user_city</str>
+        <str name="mlt.fl">user_real_country</str>
+        <str name="mlt.fl">info_birthday</str>
+        <str name="mlt.fl">info_weight</str>
+        <str name="mlt.fl">info_height</str>
+        <str name="mlt.fl">info_eyes</str>  
+        <str name="mlt.fl">info_hair</str>
+        <str name="mlt.fl">info_smoke</str>
+        <str name="mlt.fl">info_alcohol</str>
+        <str name="mlt.fl">info_marital</str>
+        <str name="mlt.fl">info_children</str>
+        <str name="mlt.fl">info_english</str>
+        <str name="mlt.fl">info_education</str>
+        <str name="mlt.fl">info_religion</str>
+        <str name="mlt.fl">info_profession</str>
+        <str name="mlt.fl">info_address</str>
+        <str name="mlt.fl">info_registration</str>
+        <str name="mlt.fl">info_about</str>
+        <str name="mlt.fl">info_hobby</str>
+        <str name="mlt.fl">info_relationship</str>
+        <str name="mlt.fl">info_presentation</str>
+        <str name="mlt.fl">info_presentation_photo</str>
+        <str name="mlt.fl">info_why</str>
+        <str name="mlt.fl">info_add_inf</str>
+        <str name="mlt.fl">info_date_smoker</str>
+        <str name="mlt.fl">info_zip</str>
+        
+    </requestHandler>
+        
+
+</schema> 
