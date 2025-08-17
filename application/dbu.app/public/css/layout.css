@@ -1,0 +1,14 @@
+/* Button Styles */
+.button-midnight-green {
+    background-color: #154c5d;
+}
+.button-midnight-green:hover {
+    background-color: #1e7899;
+}
+.bg-midnight-green {
+    background-color: #0d3a4b;
+}
+.bg-midnight-green.active,
+.bg-midnight-green:hover {
+    background-color: #1e7899;
+}

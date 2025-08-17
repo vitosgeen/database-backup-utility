@@ -9,15 +9,21 @@
 <!-- Cards -->
 <div class="row g-4 mb-5">
 <div class="col-sm-6 col-md-3">
-    <div class="dashboard-card text-center">
-    <h6>Databases</h6>
-    <h3>8</h3>
+    <div class="dashboard-card text-center position-relative">
+    <h6>
+        <a href="{{ route('databases.index') }}" class="text-decoration-none text-light">Databases</a>
+    </h6>
+    <h3>{{ $countDatabases }}</h3>
+    <a href="{{ route('databases.index') }}" class=" position-absolute top-0 end-0 m-2 text-light"><i class="bi bi-box-arrow-up-right"></i></a>
     </div>
 </div>
 <div class="col-sm-6 col-md-3">
-    <div class="dashboard-card text-center">
-    <h6>Backups</h6>
-    <h3>24</h3>
+    <div class="dashboard-card text-center position-relative">
+    <h6>
+        <a href="{{ route('backups.index') }}" class="text-decoration-none text-light">Backups</a>
+    </h6>
+    <h3>{{ $countBackups }}</h3>
+    <a href="{{ route('backups.index') }}" class=" position-absolute top-0 end-0 m-2 text-light"><i class="bi bi-box-arrow-up-right"></i></a>
     </div>
 </div>
 <div class="col-sm-6 col-md-3">
@@ -29,7 +35,7 @@
 <div class="col-sm-6 col-md-3">
     <div class="dashboard-card text-center">
     <h6>Last Backup</h6>
-    <h3>Apr 23, 2024</h3>
+    <h3>{{ $maxDateBackup ? $maxDateBackup->format('M d, Y') : 'N/A' }}</h3>
     </div>
 </div>
 </div>
@@ -46,26 +52,13 @@
     </tr>
     </thead>
     <tbody>
-    <tr>
-        <td><span class="status-pill status-success">Success</span></td>
-        <td>db1</td>
-        <td>Apr 23, 2024</td>
-    </tr>
-    <tr>
-        <td><span class="status-pill status-failed">Failed</span></td>
-        <td>db2</td>
-        <td>Apr 23, 2024</td>
-    </tr>
-    <tr>
-        <td><span class="status-pill status-success">Success</span></td>
-        <td>db3</td>
-        <td>Apr 23, 2024</td>
-    </tr>
-    <tr>
-        <td><span class="status-pill status-success">Success</span></td>
-        <td>db2</td>
-        <td>Apr 23, 2024</td>
-    </tr>
+        @foreach ($backupHistory as $backup)
+            <tr>
+                <td><span class="status-pill {{ $backup->status }}">{{ ucfirst($backup->status) }}</span></td>
+                <td>{{ $backup->database->name }}</td>
+                <td>{{ $backup->created_at->format('M d, Y H:i') }}</td>
+            </tr>
+        @endforeach
     </tbody>
 </table>
 </div>

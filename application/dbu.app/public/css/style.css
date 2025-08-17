@@ -1,0 +1,14 @@
+pre {
+  font-size: 1rem;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.user-logs .nav-link {
+    color: #fff;
+}
+.user-logs .nav-link.active {
+    background-color: #0d3a4b;
+}
+.user-logs .nav-link:hover {
+    background-color: #1e7899;
+}
