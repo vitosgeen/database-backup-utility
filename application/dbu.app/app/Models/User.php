@@ -45,4 +45,14 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function databases()
+    {
+        return $this->hasMany(\App\Models\Database::class);
+    }
+
+    public function backups()
+    {
+        return $this->hasMany(\App\Models\Backup::class);
+    }
 }
