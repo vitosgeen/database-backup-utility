@@ -42,6 +42,36 @@ services:
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_ROOT_HOST: '%'
       MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+  dbu.app-pgsql:
+    container_name: dbu.app-pgsql-container
+    networks:
+      - dbuapp_network
+    env_file: ./.env
+    image: postgres:15
+    ports:
+      - "5439:5432"
+    volumes:
+      - ./volumes/postgres:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+  dbu.app-mongodb:
+    container_name: dbu.app-mongodb-container
+    networks:
+      - dbuapp_network
+    env_file: ./.env
+    image: mongo:6
+    ports:
+      - "27019:27017"
+    volumes:
+      - ./volumes/mongodb:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGODB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGODB_ROOT_PASSWORD}
+      MONGO_INITDB_DATABASE: ${MONGODB_DATABASE}
+      MONGO_INITDB_USERNAME: ${MONGODB_USERNAME}
+      MONGO_INITDB_PASSWORD: ${MONGODB_PASSWORD}
   dbu.app-phpmyadmin:
     container_name: dbu.app-phpmyadmin-container
     networks:

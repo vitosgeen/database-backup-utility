@@ -24,6 +24,29 @@ RUN docker-php-ext-install pdo pdo_pgsql pgsql
 RUN docker-php-ext-install intl
 RUN docker-php-ext-install xsl
 
+# Install backup for mysql(mysqldump)
+RUN apt-get install -y \
+        default-mysql-client
+
+# Install backup for mongodb(mongodump)
+RUN apt-get update && \
+    apt-get install -y wget gnupg && \
+    wget -qO - https://pgp.mongodb.com/server-6.0.asc | gpg --dearmor -o /usr/share/keyrings/mongodb.gpg && \
+    echo "deb [ signed-by=/usr/share/keyrings/mongodb.gpg ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/6.0 multiverse" \
+        | tee /etc/apt/sources.list.d/mongodb-org-6.0.list && \
+    apt-get update && \
+    apt-get install -y mongodb-database-tools
+# Verify installation
+RUN mongodump --version
+
+# Install backup for postgresql(pg_dump)
+RUN apt-get install -y \
+        postgresql-client
+
+# Install backup for sqlite3
+RUN apt-get install -y \
+        sqlite3
+
 # increase memory limit
 RUN echo "memory_limit=512M" > /usr/local/etc/php/conf.d/memory-limit.ini
 

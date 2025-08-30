@@ -5,6 +5,9 @@ run:
 stop:
 	docker-compose down
 
+test:
+	docker-compose exec dbu.app php artisan test
+
 getlaravel:
 	docker-compose exec dbu.app composer create-project --prefer-dist laravel/laravel . 11.*
 	docker-compose exec dbu.app mkdir -p /var/www/html/storage/logs
